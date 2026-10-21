@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827"><meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Meu Dia">
+<meta name="description" content="Organizador pessoal de tarefas e agenda.">
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/icon-192.png"><link rel="stylesheet" href="styles.css">
+<title>Meu Dia — Organizador pessoal</title></head><body>
+<div class="app-shell">
+<header class="topbar"><div><p class="eyebrow" id="todayLabel">SEU ORGANIZADOR PESSOAL</p><h1 id="greeting">Vamos organizar o dia.</h1></div><button class="avatar" id="quickAdd" aria-label="Adicionar tarefa">＋</button></header>
+<main>
+<section class="screen active" id="screen-home">
+<div class="date-card"><div><span class="muted">HOJE</span><h2 id="longDate">Carregando data…</h2><p id="dayMessage">Um passo de cada vez.</p></div><div class="date-mark" id="dayNumber">21</div></div>
+<div class="stats-grid"><article class="stat-card"><span class="stat-icon">◷</span><strong id="pendingCount">0</strong><span>Pendentes</span></article><article class="stat-card"><span class="stat-icon">✓</span><strong id="doneCount">0</strong><span>Concluídas</span></article><article class="stat-card"><span class="stat-icon">↗</span><strong id="eventCount">0</strong><span>Compromissos</span></article></div>
+<div class="section-heading"><div><p class="eyebrow">FOCO</p><h2>Prioridades de hoje</h2></div><button class="text-button" data-go="tasks">Ver todas</button></div><div id="todayTasks" class="task-list"></div><div class="section-heading upcoming-heading"><div><p class="eyebrow">LEMBRETES</p><h2>Alertas importantes</h2></div></div><div id="reminderFeed" class="event-list"></div>
+<div class="section-heading upcoming-heading"><div><p class="eyebrow">NA AGENDA</p><h2>Próximos compromissos</h2></div><button class="text-button" data-go="agenda">Abrir agenda</button></div><div id="upcomingEvents" class="event-list"></div>
+</section>
+<section class="screen" id="screen-tasks"><div class="page-title"><p class="eyebrow">ORGANIZAÇÃO</p><h2>Minhas tarefas</h2><p class="muted">Transforme planos em próximos passos.</p></div>
+<div class="filter-row"><button class="filter-chip selected" data-filter="open">Pendentes</button><button class="filter-chip" data-filter="all">Todas</button><button class="filter-chip" data-filter="done">Concluídas</button></div><div id="allTasks" class="task-list"></div><button class="primary-button full" id="addTaskButton">＋ Nova tarefa</button></section>
+<section class="screen" id="screen-agenda"><div class="page-title"><p class="eyebrow">TEMPO E COMPROMISSOS</p><h2>Minha agenda</h2><p class="muted">Organize o que tem hora marcada.</p></div>
+<div class="calendar-card"><div class="calendar-top"><button id="prevMonth" aria-label="Mês anterior">‹</button><h3 id="monthTitle">Mês</h3><button id="nextMonth" aria-label="Próximo mês">›</button></div>
+<div class="calendar-grid weekday-row"><span>SEG</span><span>TER</span><span>QUA</span><span>QUI</span><span>SEX</span><span>SÁB</span><span>DOM</span></div><div class="calendar-grid" id="calendarDays"></div></div>
+<div class="section-heading"><div><p class="eyebrow">SELECIONADO</p><h2 id="selectedDateTitle">Compromissos</h2></div><button class="text-button" id="addEventButton">＋ Adicionar</button></div><div id="dayEvents" class="event-list"></div></section>
+<section class="screen" id="screen-settings"><div class="page-title"><p class="eyebrow">SEU ESPAÇO</p><h2>Configurações</h2><p class="muted">Seus dados ficam neste dispositivo.</p></div>
+<div class="settings-card"><div class="setting-row"><div><strong>Alertas do aplicativo</strong><p id="notificationStatus">Verificando suporte a notificações…</p></div><button class="outline-button" id="enableNotifications">Ativar</button></div>
+<div class="setting-row"><div><strong>Exportar agenda com alarmes</strong><p>Gere um arquivo .ics para adicionar os eventos ao Calendário do iPhone. Os alarmes passam a ser gerenciados pelo Calendário.</p></div><button class="outline-button" id="exportCalendar">Exportar</button></div>
+<div class="setting-row"><div><strong>Armazenamento local</strong><p>As tarefas e os compromissos são salvos neste navegador.</p></div><span class="status-dot">●</span></div>
+<div class="setting-row"><div><strong>Exportar meus dados</strong><p>Baixe uma cópia de segurança em formato JSON.</p></div><button class="outline-button" id="exportData">Exportar</button></div>
+<div class="setting-row"><div><strong>Importar cópia de segurança</strong><p>Restaure dados previamente exportados.</p></div><label class="outline-button file-label">Importar<input id="importData" type="file" accept="application/json"></label></div>
+<div class="setting-row"><div><strong>Instalação no iPhone</strong><p>Abra no Safari, toque em Compartilhar e escolha “Adicionar à Tela de Início”.</p></div></div>
+<div class="setting-row"><div><strong>Sincronização entre dispositivos</strong><p>Esta versão não sincroniza automaticamente entre aparelhos. Isso pode ser adicionado depois.</p></div></div></div><p class="footer-note">MEU DIA · VERSÃO INICIAL</p></section>
+</main>
+<nav class="tabbar" aria-label="Navegação principal"><button class="tab active" data-tab="home"><span>⌂</span><small>Hoje</small></button><button class="tab" data-tab="tasks"><span>☷</span><small>Tarefas</small></button><button class="tab" data-tab="agenda"><span>▦</span><small>Agenda</small></button><button class="tab" data-tab="settings"><span>⚙</span><small>Ajustes</small></button></nav>
+</div>
+<dialog id="itemDialog"><form id="itemForm" method="dialog"><div class="modal-head"><div><p class="eyebrow" id="modalEyebrow">NOVO ITEM</p><h2 id="modalTitle">Nova tarefa</h2></div><button type="button" class="close-button" id="closeDialog" aria-label="Fechar">×</button></div>
+<input type="hidden" id="itemType" value="task"><input type="hidden" id="itemId">
+<label class="field-label" for="itemTitle">Título</label><input class="field" id="itemTitle" maxlength="100" required placeholder="Ex.: Revisar prioridades">
+<label class="field-label" for="itemDate">Data</label><input class="field" id="itemDate" type="date" required>
+<div id="taskFields"><label class="field-label" for="itemPriority">Prioridade</label><select class="field" id="itemPriority"><option value="high">Alta</option><option value="medium" selected>Média</option><option value="low">Baixa</option></select>
+<label class="field-label" for="itemCategory">Categoria</label><select class="field" id="itemCategory"><option>Pessoal</option><option>Trabalho</option><option>Estudos</option><option>Casa</option><option>Saúde</option><option>Outros</option></select></div>
+<div id="eventFields" hidden><label class="field-label" for="itemTime">Horário</label><input class="field" id="itemTime" type="time" value="09:00"><label class="field-label" for="itemLocation">Local (opcional)</label><input class="field" id="itemLocation" maxlength="100" placeholder="Ex.: Escritório"></div>
+<div class="reminder-fields"><label class="field-label" for="reminderLead">Lembrete</label>
+<select class="field" id="reminderLead"><option value="none">Sem lembrete</option><option value="0">Na hora</option><option value="5">5 minutos antes</option><option value="15" selected>15 minutos antes</option><option value="30">30 minutos antes</option><option value="60">1 hora antes</option><option value="1440">1 dia antes</option></select>
+<div id="taskTimeField"><label class="field-label" for="taskTime">Horário da tarefa</label><input class="field" id="taskTime" type="time" value="09:00"></div>
+<p class="helper-text">Alertas internos aparecem quando o aplicativo estiver aberto. Para alertas com o app fechado, exporte para o Calendário do iPhone.</p></div>
+<label class="field-label" for="itemNotes">Observações (opcional)</label><textarea class="field" id="itemNotes" rows="3" maxlength="500" placeholder="Detalhes importantes…"></textarea>
+<button class="primary-button full submit-button" type="submit">Salvar</button><button class="outline-button full" type="button" id="exportCalendarItem" hidden>Adicionar ao Calendário do iPhone (.ics)</button><button class="delete-button full" type="button" id="deleteItem" hidden>Excluir item</button></form></dialog><div id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script><script>if('serviceWorker'in navigator&&location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));</script>
+</body></html>
